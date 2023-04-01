@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "*.tsu": "ruby",
+        "*.lu": "ruby",
+        "irc.h": "c",
+        "3ds.h": "c",
+        "exheader.h": "c",
+        "stdio.h": "c",
+        "string.h": "c"
+    }
+}
