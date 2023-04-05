@@ -3,7 +3,7 @@
 #include <fcntl.h>
 #include <citro2d.h>
 
-#include "net/irc_parse.h"
+#include <sys/select.h>
 #include "net/irc_client.h"
 
 int main(int argc, char **argv)
@@ -17,19 +17,30 @@ int main(int argc, char **argv)
     consoleInit(GFX_TOP, NULL);
     printf("IRThree v0.1 (c) Rem. Licensed under MIT.\n");
 
-    struct IRCClient *client = clientCreate();
-    enum ClientStatus status = clientConnect(client, "185.100.59.59", 6667);
+    // client
+    struct IrcClient *client = clientCreate("rem");
+    enum ClientStatus status = clientConnect(client, "irc.efnet.nl", 6667);
+
+    clientJoin(client, "#linux");
+
+    atexit(gfxExit);
+    atexit(socExit);
 
     char buffer[1024] = {0};
+
+    // select loop
+    int selected;
+    struct timeval tv = {
+        .tv_sec = 1,
+        .tv_usec = 1,
+    };
+
+    fd_set readfds;
 
     while (aptMainLoop())
     {
         hidScanInput();
-
-        // TODO: fix so this doesn't spam and hang the main thread
-
-        int recv = read(client->fd, buffer, 1024);
-        printf("%s\n", buffer);
+        clientProcess(client);
 
         if (hidKeysDown() & KEY_START)
             break;
@@ -38,6 +49,5 @@ int main(int argc, char **argv)
     clientClose(client);
     C2D_Fini();
     C3D_Fini();
-    gfxExit();
     return 0;
 }

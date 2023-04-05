@@ -170,7 +170,7 @@ all: $(BUILD) $(GFXBUILD) $(DEPSDIR) $(ROMFS_T3XFILES) $(T3XHFILES)
 
 link:
 	@make all
-	@3dslink $(TARGET).3dsx -a 192.168.86.28
+	@3dslink $(TARGET).3dsx -a 192.168.86.59
 
 $(BUILD):
 	@mkdir -p $@

@@ -6,6 +6,15 @@
         "3ds.h": "c",
         "exheader.h": "c",
         "stdio.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "in.h": "c",
+        "fcntl.h": "c",
+        "stdbool.h": "c",
+        "reent.h": "c",
+        "irc_client.h": "c",
+        "inet.h": "c",
+        "irc_parse.h": "c",
+        "stdlib.h": "c",
+        "irc_cmd.h": "c"
     }
 }
